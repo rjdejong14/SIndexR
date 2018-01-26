@@ -2249,25 +2249,6 @@ short int Sindex_DefGICurve (short int sp_index)
 }
 
 
-
-
-
-//' @title
-//' Returns default curve index for a species and establishment type.
-//' @description
-//' Returns default curve index for a species and establishment type.
-//' @param sp_index Integer, Speciefies species index.
-//' @param estab Integer, Speciefies establishment type.
-//' @return
-//'    Integer curve index, for use in other Sindex functions.
-//'    May return an error code under the following conditions:
-//'
-//'    return value    condition
-//'    ------------    ---------
-//'    SI_ERR_SPEC     input parameter is not a valid species index
-//'    SI_ERR_ESTAB    input parameter is not a valid establishment type
-//'    SI_ERR_NO_ANS   no curves defined for this species
-//' @rdname Sindex_DefCurveEst
 // [[Rcpp::export]]
 short int Sindex_DefCurveEst (short int sp_index, short int estab)
 {
