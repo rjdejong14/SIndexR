@@ -61,28 +61,6 @@ Sindex_NextCurve <- function(sp_index, cu_index) {
     .Call(`_SIndexR_Sindex_NextCurve`, sp_index, cu_index)
 }
 
-#' @title
-#' Returns a code telling what functions are available for a curve index.
-#' @description
-#' Returns a code telling what functions are available for a curve index.
-#' @param cu_index Integer, Defines curve index.
-#'
-#' @return
-#'    Integer code.
-#'    May return an error code under the following conditions:
-#'
-#'    return value    condition
-#'
-#'    ------------    ---------
-#'
-#'    SI_ERR_CURVE    input curve is not a valid curve index.
-#' @note
-#'      Code bits are set as follows:
-#'      0001: ht = fn (si, age)
-#'      0010: si = fn (ht, age)
-#'      0100: y2bh = fn (si)
-#'      1000: si = fn (ht, age) growth intercept
-#' @rdname Sindex_CurveUse
 Sindex_CurveUse <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveUse`, cu_index)
 }
