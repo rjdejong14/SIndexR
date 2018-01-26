@@ -65,21 +65,6 @@ Sindex_CurveUse <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveUse`, cu_index)
 }
 
-#' @title
-#' Convert curve index to species index
-#' @description
-#' Returns species index for a given curve index.
-#' @param cu_index Integer, Specifies cuive index.
-#' @return
-#'    Integer species index, for use in other Sindex functions.
-#'    May return an error code under the following conditions:
-#'
-#'    return value    condition
-#'
-#'    ------------    ---------
-#'
-#'    SI_ERR_CURVE    input curve is not a valid curve index for any species.
-#' @rdname Sindex_CurveToSpecies
 Sindex_CurveToSpecies <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveToSpecies`, cu_index)
 }

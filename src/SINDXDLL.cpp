@@ -2453,22 +2453,6 @@ short int Sindex_CurveUse (short int cu_index)
 }
 
 
-
-//' @title
-//' Convert curve index to species index
-//' @description
-//' Returns species index for a given curve index.
-//' @param cu_index Integer, Specifies cuive index.
-//' @return
-//'    Integer species index, for use in other Sindex functions.
-//'    May return an error code under the following conditions:
-//'
-//'    return value    condition
-//'
-//'    ------------    ---------
-//'
-//'    SI_ERR_CURVE    input curve is not a valid curve index for any species.
-//' @rdname Sindex_CurveToSpecies
 // [[Rcpp::export]]
 short int Sindex_CurveToSpecies (
     short int cu_index)
