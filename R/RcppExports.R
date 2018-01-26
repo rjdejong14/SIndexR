@@ -70,28 +70,6 @@ Sindex_CurveToSpecies <- function(cu_index) {
 }
 
 #' @title
-#'  Site index conversion between species
-#' @description
-#'  Site index conversion between species. This function needs to be revised.
-#' @param sp_index1 Integer, Source species index.
-#' @param site Numeric, Source species site index.
-#' @param sp_index2 Integer, Target species index.
-#' @return
-#'    Floating point target species site index. (computed)
-#'
-#'  Return Value
-#'  ------------
-#'    0, or an error code under the following conditions:
-#'
-#'    return value    condition
-#'    ------------    ---------
-#'    SI_ERR_SPEC     source or target species index is not valid.
-#'    SI_ERR_NO_ANS   there is no conversion defined.
-Sindex_SIToSI <- function(sp_index1, site, sp_index2) {
-    .Call(`_SIndexR_Sindex_SIToSI`, sp_index1, site, sp_index2)
-}
-
-#' @title
 #' Returns string containing species code.
 #' @description
 #' Returns string containing species code.

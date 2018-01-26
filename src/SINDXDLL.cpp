@@ -2468,7 +2468,6 @@ short int Sindex_CurveToSpecies (
 
 /*
  * site index conversion between species
- */
 //' @title
 //'  Site index conversion between species
 //' @description
@@ -2520,7 +2519,7 @@ short int Sindex_SIToSI (
   }
 
 }
-
+ */
 
 
 //' @title
