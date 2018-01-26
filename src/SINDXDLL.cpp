@@ -2034,23 +2034,6 @@ short int Sindex_FirstSpecies ()
 }
 
 
-
-//' @title
-//' Next species defined in Sindex
-//' @description
-//' Given a species index, returns the next species defined in Sindex.
-//' @param sp_index Integer, Specifies species index.
-//' @return
-//' Integer species index, for use in other Sindex functions.
-//'    May return an error code under the following conditions:
-//'
-//'    return value    condition
-//'    ------------    ---------
-//'    SI_ERR_SPEC     input parameter is not a valid species index
-//'    SI_ERR_NO_ANS   input parameter is last defined species index
-//' @note
-//' No assumption should be made about the ordering of the species.
-//' @rdname Sindex_NextSpecies
 // [[Rcpp::export]]
 short int Sindex_NextSpecies (short int sp_index)
 {
@@ -2063,26 +2046,6 @@ short int Sindex_NextSpecies (short int sp_index)
   return sp_index+1;
 }
 
-
-//' @title
-//' Returns a code telling where a species generally exists.
-//' @description
-//' Returns a code telling where a species generally exists.
-//' @param sp_index Integer, Specifies species index.
-//' @return
-//' Integer code.
-//'    May return an error code under the following conditions:
-//'
-//'    return value    condition
-//'    ------------    ---------
-//'    SI_ERR_SPEC     input parameter is not a valid species index
-//'
-//' @note
-//'    Code bits are set as follows:
-//'         1: BC coast
-//'        10: BC interior
-//'       100: common species in BC (0 means uncommon)
-//' @rdname Sindex_SpecUse
 // [[Rcpp::export]]
 short int Sindex_SpecUse (short int sp_index)
 {
@@ -2249,20 +2212,6 @@ short int Sindex_SpecUse (short int sp_index)
 
 
 
-//' @title
-//' Returns default curve index for a species
-//' @description
-//' Returns default curve index for a species
-//' @param sp_index Integer, Specifies species index.
-//' @return
-//' Integer curve index, for use in other Sindex functions.
-//'    May return an error code under the following conditions:
-//'
-//'    return value    condition
-//'    ------------    ---------
-//'    SI_ERR_SPEC     input parameter is not a valid species index
-//'    SI_ERR_NO_ANS   no curves defined for this species
-//' @rdname Sindex_DefCurve
 // [[Rcpp::export]]
 short int Sindex_DefCurve (short int sp_index)
 {
