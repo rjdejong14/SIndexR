@@ -57,28 +57,6 @@ Sindex_FirstCurve <- function(sp_index) {
     .Call(`_SIndexR_Sindex_FirstCurve`, sp_index)
 }
 
-#' @title
-#' Returns next defined curve index for a species.
-#' @description
-#' Returns next defined curve index for a species.
-#' @param sp_index Integer, Specifies species index.
-#' @param cu_index Integer, Specifies curve index.
-#' @return
-#'   Integer curve index, for use in other Sindex functions.
-#'    May return an error code under the following conditions:
-#'
-#'    return value    condition
-#'
-#'    ------------    ---------
-#'
-#'    SI_ERR_SPEC     input species is not a valid species index.
-#'
-#'    SI_ERR_CURVE    input curve is not a valid curve index for this species.
-#'
-#'    SI_ERR_NO_ANS   input parameter is last defined index for this species.
-#' @note
-#'    No assumption should be made about the ordering of the curves.
-#' @rdname Sindex_NextCurve
 Sindex_NextCurve <- function(sp_index, cu_index) {
     .Call(`_SIndexR_Sindex_NextCurve`, sp_index, cu_index)
 }
