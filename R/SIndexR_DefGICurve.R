@@ -2,7 +2,7 @@
 #' Returns default GI curve index for a species.
 #' @description
 #' Returns default GI curve index for a species.
-#' @param sp_index Integer, Specifies species index.
+#' @param sp_index Integer/Numeric, Specifies species index.
 #' @return
 #'    Integer curve index, for use in other Sindex functions.
 #'    May return an error code under the following conditions:
