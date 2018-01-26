@@ -16,7 +16,9 @@ SIndexR_DefGICurve <- function(sp_index){
   if(!(class(sp_index) %in% c("numeric", "integer"))){
     stop("sp_index must be either numeric or integer.")
   } else if (class(sp_index) == "numeric") {
-    if(round(sp_index) != sp_index){
+    if(identical(sp_index, round(sp_index))){
+      sp_index <- as.integer(sp_index)
+    } else {
       stop("sp_index must be either numeric or integer.")
     }
   }
