@@ -2522,18 +2522,6 @@ short int Sindex_SIToSI (
  */
 
 
-//' @title
-//' Returns string containing species code.
-//' @description
-//' Returns string containing species code.
-//' @param sp_index Integer, Specifies species index.
-//' @return
-//' Pointer to string containing species code.
-//'    If input parameter is not a valid species index, the return is the
-//'    null pointer.
-//' @note
-//' Species code string takes the form "Xx" or "Xxx", such as "Sw" or "Fdc".
-//' @rdname Sindex_SpecCode
 // [[Rcpp::export]]
 std::string Sindex_SpecCode (short int sp_index)
 {

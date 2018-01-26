@@ -69,18 +69,6 @@ Sindex_CurveToSpecies <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveToSpecies`, cu_index)
 }
 
-#' @title
-#' Returns string containing species code.
-#' @description
-#' Returns string containing species code.
-#' @param sp_index Integer, Specifies species index.
-#' @return
-#' Pointer to string containing species code.
-#'    If input parameter is not a valid species index, the return is the
-#'    null pointer.
-#' @note
-#' Species code string takes the form "Xx" or "Xxx", such as "Sw" or "Fdc".
-#' @rdname Sindex_SpecCode
 Sindex_SpecCode <- function(sp_index) {
     .Call(`_SIndexR_Sindex_SpecCode`, sp_index)
 }
