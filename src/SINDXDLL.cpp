@@ -2533,19 +2533,6 @@ std::string Sindex_SpecCode (short int sp_index)
 
 
 
-//' @title
-//' Returns string containing species name.
-//' @description
-//' Returns string containing species name.
-//' @param sp_index Integer, Specifies species index
-//' @return
-//'    Pointer to string containing species name.
-//'    If input parameter is not a valid species index, the return is the
-//'    null pointer.
-//'
-//' @note
-//'    Species name string examples: "Coastal Douglas-fir", "Sitka Spruce".
-//' @rdname Sindex_SpecName
 // [[Rcpp::export]]
 std::string Sindex_SpecName (short int sp_index)
 {

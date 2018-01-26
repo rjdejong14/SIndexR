@@ -73,19 +73,6 @@ Sindex_SpecCode <- function(sp_index) {
     .Call(`_SIndexR_Sindex_SpecCode`, sp_index)
 }
 
-#' @title
-#' Returns string containing species name.
-#' @description
-#' Returns string containing species name.
-#' @param sp_index Integer, Specifies species index
-#' @return
-#'    Pointer to string containing species name.
-#'    If input parameter is not a valid species index, the return is the
-#'    null pointer.
-#'
-#' @note
-#'    Species name string examples: "Coastal Douglas-fir", "Sitka Spruce".
-#' @rdname Sindex_SpecName
 Sindex_SpecName <- function(sp_index) {
     .Call(`_SIndexR_Sindex_SpecName`, sp_index)
 }
