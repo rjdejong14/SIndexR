@@ -7,7 +7,7 @@
 SIndexR_DefGICurve(sp_index)
 }
 \arguments{
-\item{sp_index}{Integer, Specifies species index.}
+\item{sp_index}{Integer/Numeric, Specifies species index.}
 }
 \value{
 Integer curve index, for use in other Sindex functions.
