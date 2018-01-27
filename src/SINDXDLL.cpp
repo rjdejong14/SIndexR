@@ -2649,15 +2649,6 @@ std::string Sindex_CurveSource (short int cu_index)
 /*
 * curve notes
 */
-//' @title
-//' Curve notes
-//' @description
-//'    Returns string containing notes on use.
-//' @param cu_index Integer, Curve index.
-//' @return A string containing notes on use of curve.
-//'    If input parameter is not a valid curve index, the return is the
-//'    null pointer.
-//' @rdname Sindex_CurveNotes
 // [[Rcpp::export]]
 std::string Sindex_CurveNotes (short int cu_index)
 {
