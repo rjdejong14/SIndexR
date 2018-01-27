@@ -77,19 +77,6 @@ Sindex_SpecName <- function(sp_index) {
     .Call(`_SIndexR_Sindex_SpecName`, sp_index)
 }
 
-#' @title
-#'    Curve name
-#' @description
-#'    Returns string containing author and date of curve.
-#' @param cu_index Integer, Curve index.
-#' @return
-#'    A string containing curve author and date.
-#'    If input parameter is not a valid curve index, the return is the
-#'    \code{null}.
-#'
-#' @note
-#'    Curve name string examples: "Bruce (1981)", "Nigh (1998)".
-#' @rdname Sindex_CurveName
 Sindex_CurveName <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveName`, cu_index)
 }
