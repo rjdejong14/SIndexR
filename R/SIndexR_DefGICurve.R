@@ -13,14 +13,6 @@
 #'    SI_ERR_NO_ANS   no GI equations defined for this species.
 #' @rdname SIndexR_DefGICurve
 SIndexR_DefGICurve <- function(sp_index){
-  if(!(class(sp_index) %in% c("numeric", "integer"))){
-    stop("sp_index must be either numeric or integer.")
-  } else if (class(sp_index) == "numeric") {
-    if(identical(sp_index, round(sp_index))){
-      sp_index <- as.integer(sp_index)
-    } else {
-      stop("sp_index must be either numeric or integer.")
-    }
-  }
+  sp_index <- wholeToInteger(sp_index, "sp_index")
   return(unlist(lapply(sp_index, function(s) Sindex_DefGICurve(s))))
 }

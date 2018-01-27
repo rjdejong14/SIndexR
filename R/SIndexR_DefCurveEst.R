@@ -16,24 +16,9 @@
 #' @export
 #' @rdname SIndexR_DefCurveEst
 SIndexR_DefCurveEst <- function(sp_index, estab){
-  if(!(class(sp_index) %in% c("numeric", "integer"))){
-    stop("sp_index must be either numeric or integer.")
-  } else if (class(sp_index) == "numeric") {
-    if(!identical(round(sp_index), sp_index)){
-      stop("sp_index must be either numeric or integer.")
-    } else {
-      sp_index <- as.integer(sp_index)
-    }
-  }
-  if(!(class(estab) %in% c("numeric", "integer"))){
-    stop("estab must be either numeric or integer.")
-  } else if (class(estab) == "numeric") {
-    if(!identical(round(estab), estab)){
-      stop("estab must be either numeric or integer.")
-    } else {
-      estab <- as.integer(estab)
-    }
-  }
+  sp_index <- wholeToInteger(sp_index, "sp_index")
+  estab <- wholeToInteger(estab, "estab")
+
   if(length(sp_index) == 1 & length(estab) != 1){
     sp_index <- rep(sp_index, length(estab))
   }

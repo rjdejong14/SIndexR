@@ -22,24 +22,8 @@
 #' @rdname SIndexR_NextCurve
 
 SIndexR_NextCurve <- function(sp_index, cu_index){
-  if(!(class(sp_index) %in% c("numeric", "integer"))){
-    stop("sp_index must be either numeric or integer.")
-  } else if (class(sp_index) == "numeric") {
-    if(!identical(round(sp_index), sp_index)){
-      stop("sp_index must be either numeric or integer.")
-    } else {
-      sp_index <- as.integer(sp_index)
-    }
-  }
-  if(!(class(cu_index) %in% c("numeric", "integer"))){
-    stop("cu_index must be either numeric or integer.")
-  } else if (class(cu_index) == "numeric") {
-    if(!identical(round(cu_index), cu_index)){
-      stop("cu_index must be either numeric or integer.")
-    } else {
-      cu_index <- as.integer(cu_index)
-    }
-  }
+  sp_index <- wholeToInteger(sp_index, "sp_index")
+  cu_index <- wholeToInteger(cu_index, "cu_index")
   if(length(sp_index) == 1 & length(cu_index) != 1){
     sp_index <- rep(sp_index, length(cu_index))
   }

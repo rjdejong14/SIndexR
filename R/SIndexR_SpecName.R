@@ -12,14 +12,6 @@
 #'    Species name string examples: "Coastal Douglas-fir", "Sitka Spruce".
 #' @rdname SIndexR_SpecName
 SIndexR_SpecName <- function(sp_index){
-  if(!(class(sp_index) %in% c("numeric", "integer"))){
-    stop("sp_index must be either numeric or integer.")
-  } else if (class(sp_index) == "numeric") {
-    if(!identical(round(sp_index), sp_index)){
-      stop("sp_index must be either numeric or integer.")
-    } else {
-      sp_index <- as.integer(sp_index)
-    }
-  }
+  sp_index <- wholeToInteger(sp_index, "sp_index")
   return(unlist(lapply(sp_index, function(s) Sindex_SpecName(s))))
 }

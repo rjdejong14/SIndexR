@@ -8,6 +8,6 @@
 #'    null pointer.
 #' @rdname SIndexR_CurveNotes
 SIndexR_CurveNotes <- function(cu_index){
-  wholeToInteger(cu_index, "cu_index")
+  cu_index <- wholeToInteger(cu_index, "cu_index")
   return(unlist(lapply(cu_index, function(s) Sindex_CurveNotes(s))))
 }
