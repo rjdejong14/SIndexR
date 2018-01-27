@@ -2553,18 +2553,6 @@ std::string Sindex_CurveName (short int cu_index)
 }
 
 
-
-
-//' @title
-//' Curve source
-//' @description
-//'  Returns string containing publication source.
-//' @param cu_index Integer, Curve index.
-//' @return
-//' String containing publication citation.
-//'    If input parameter is not a valid curve index, the return is the
-//'    null pointer.
-//' @rdname Sindex_CurveSource
 // [[Rcpp::export]]
 std::string Sindex_CurveSource (short int cu_index)
 {

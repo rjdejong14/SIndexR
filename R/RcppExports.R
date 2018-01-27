@@ -81,16 +81,6 @@ Sindex_CurveName <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveName`, cu_index)
 }
 
-#' @title
-#' Curve source
-#' @description
-#'  Returns string containing publication source.
-#' @param cu_index Integer, Curve index.
-#' @return
-#' String containing publication citation.
-#'    If input parameter is not a valid curve index, the return is the
-#'    null pointer.
-#' @rdname Sindex_CurveSource
 Sindex_CurveSource <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveSource`, cu_index)
 }
