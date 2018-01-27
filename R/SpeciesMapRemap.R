@@ -43,21 +43,20 @@ SIndexR_SpecMap <- function(sc)
 #' @rdname   SIndexR_SpecRemap
 SIndexR_SpecRemap <- function(sc, fiz)
 {
-  if(length(sp_index) == 1 & length(cu_index) != 1){
-    sp_index <- rep(sp_index, length(cu_index))
+  if(length(sc) == 1 & length(fiz) != 1){
+    sc <- rep(sc, length(fiz))
   }
-  if(length(sp_index) != 1 & length(cu_index) == 1){
-    cu_index <- rep(cu_index, length(sp_index))
+  if(length(sc) != 1 & length(fiz) == 1){
+    fiz <- rep(fiz, length(sc))
   }
-  if(length(sp_index) != length(cu_index)){
-    stop("sp_index and cu_index do not have same length.")
+  if(length(sc) != length(fiz)){
+    stop("sc and fiz do not have same length.")
   }
-  sp_index_list <- lapply(sp_index, function(s) s)
-  cu_index_list <- lapply(cu_index, function(s) s)
-  allinputs <- Map(list, sp_index_list, cu_index_list)
-  return(unlist(lapply(allinputs, function(s) Sindex_NextCurve(sp_index = s[[1]],
-                                                               cu_index = s[[2]]))))
+  sc_list <- lapply(sc, function(s) s)
+  fiz_list <- lapply(fiz, function(s) s)
+  allinputs <- Map(list, sc_list, fiz_list)
+  return(unlist(lapply(allinputs, function(s) species_remap(sc = s[[1]],
+                                                               fiz = s[[2]]))))
 
-  return(species_remap (sc, fiz))
 }
 
