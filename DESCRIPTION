@@ -12,5 +12,6 @@ RoxygenNote: 6.0.1
 Imports: 
   Rcpp (>= 0.12.14),
   rmarkdown,
-  methods
+  methods,
+  data.table
 LinkingTo: Rcpp
