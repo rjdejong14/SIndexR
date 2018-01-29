@@ -2,11 +2,11 @@
 #' Convert age to other type
 #' @description
 #'    Age conversion between age types (total vs breast height)
-#' @param cu_index Integer, Curve index.
+#' @param cu_index Integer/Numeric, Curve index.
 #' @param age1 Numeric, Source age.
-#' @param age_type1 Integer, Type of source age (SI_AT_BREAST or SI_AT_TOTAL).
+#' @param age_type1 Integer/Numeric, Type of source age (SI_AT_BREAST or SI_AT_TOTAL).
 #' @param y2bh Numeric, Years to breast height.
-#' @param age_type2 Integer, Type of target age (SI_AT_BREAST or SI_AT_TOTAL).
+#' @param age_type2 Integer/Numeric, Type of target age (SI_AT_BREAST or SI_AT_TOTAL).
 #'
 #' @return
 #'  \code{output} contains computed targe age.

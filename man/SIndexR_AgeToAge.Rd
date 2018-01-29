@@ -7,15 +7,15 @@
 SIndexR_AgeToAge(cu_index, age1, age_type1, y2bh, age_type2)
 }
 \arguments{
-\item{cu_index}{Integer, Curve index.}
+\item{cu_index}{Integer/Numeric, Curve index.}
 
 \item{age1}{Numeric, Source age.}
 
-\item{age_type1}{Integer, Type of source age (SI_AT_BREAST or SI_AT_TOTAL).}
+\item{age_type1}{Integer/Numeric, Type of source age (SI_AT_BREAST or SI_AT_TOTAL).}
 
 \item{y2bh}{Numeric, Years to breast height.}
 
-\item{age_type2}{Integer, Type of target age (SI_AT_BREAST or SI_AT_TOTAL).}
+\item{age_type2}{Integer/Numeric, Type of target age (SI_AT_BREAST or SI_AT_TOTAL).}
 }
 \value{
 \code{output} contains computed targe age.
