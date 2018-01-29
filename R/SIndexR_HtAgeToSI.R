@@ -45,7 +45,7 @@ SIndexR_HtAgeToSI <- function(curve,
   curve <- wholeToInteger(curve, "curve")
   ageType <- wholeToInteger(ageType, "ageType")
   estType <- wholeToInteger(estType, "estType")
-  inputdata <- data.table(curve, age, ageType, height, estType)
+  inputdata <- data.table::data.table(curve, age, ageType, height, estType)
   rm(curve, age, ageType, height, estType)
   curve_list <- as.list(inputdata$curve)
   age_list <- as.list(inputdata$age)
