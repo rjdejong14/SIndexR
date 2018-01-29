@@ -69,6 +69,10 @@ Sindex_CurveToSpecies <- function(cu_index) {
     .Call(`_SIndexR_Sindex_CurveToSpecies`, cu_index)
 }
 
+Sindex_SITOSI <- function(sp_index1, site, sp_index2) {
+    .Call(`_SIndexR_Sindex_SITOSI`, sp_index1, site, sp_index2)
+}
+
 Sindex_SpecCode <- function(sp_index) {
     .Call(`_SIndexR_Sindex_SpecCode`, sp_index)
 }

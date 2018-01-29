@@ -2466,28 +2466,8 @@ short int Sindex_CurveToSpecies (
 
 
 
-/*
- * site index conversion between species
-//' @title
-//'  Site index conversion between species
-//' @description
-//'  Site index conversion between species. This function needs to be revised.
-//' @param sp_index1 Integer, Source species index.
-//' @param site Numeric, Source species site index.
-//' @param sp_index2 Integer, Target species index.
-//' @return
-//'    Floating point target species site index. (computed)
-//'
-//'  Return Value
-//'  ------------
-//'    0, or an error code under the following conditions:
-//'
-//'    return value    condition
-//'    ------------    ---------
-//'    SI_ERR_SPEC     source or target species index is not valid.
-//'    SI_ERR_NO_ANS   there is no conversion defined.
 // [[Rcpp::export]]
-short int Sindex_SIToSI (
+double Sindex_SITOSI (
     short int sp_index1,
     double    site,
     short int sp_index2)
@@ -2495,17 +2475,14 @@ short int Sindex_SIToSI (
   short int i;
   double site2;
 
-
   if (sp_index1 < 0 || sp_index1 >= SI_MAX_SPECIES)
   {
     site2 = SI_ERR_SPEC;
-    return site2;
   }
 
   if (sp_index2 < 0 || sp_index2 >= SI_MAX_SPECIES)
   {
     site2 = SI_ERR_SPEC;
-    return site2;
   }
 
   for (i = 0; i < SI_MAX_CONVERT; i++)
@@ -2514,12 +2491,12 @@ short int Sindex_SIToSI (
       if (si_convert[i][1] == sp_index2)
       {
         site2 = si_convert[i][2] + si_convert[i][3] * site;
-        return site2;
       }
   }
 
+  site2 = SI_ERR_NO_ANS;
+  return site2;
 }
- */
 
 
 // [[Rcpp::export]]

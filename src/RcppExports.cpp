@@ -211,6 +211,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Sindex_SITOSI
+double Sindex_SITOSI(short int sp_index1, double site, short int sp_index2);
+RcppExport SEXP _SIndexR_Sindex_SITOSI(SEXP sp_index1SEXP, SEXP siteSEXP, SEXP sp_index2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< short int >::type sp_index1(sp_index1SEXP);
+    Rcpp::traits::input_parameter< double >::type site(siteSEXP);
+    Rcpp::traits::input_parameter< short int >::type sp_index2(sp_index2SEXP);
+    rcpp_result_gen = Rcpp::wrap(Sindex_SITOSI(sp_index1, site, sp_index2));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Sindex_SpecCode
 std::string Sindex_SpecCode(short int sp_index);
 RcppExport SEXP _SIndexR_Sindex_SpecCode(SEXP sp_indexSEXP) {
@@ -332,6 +345,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_SIndexR_Sindex_NextCurve", (DL_FUNC) &_SIndexR_Sindex_NextCurve, 2},
     {"_SIndexR_Sindex_CurveUse", (DL_FUNC) &_SIndexR_Sindex_CurveUse, 1},
     {"_SIndexR_Sindex_CurveToSpecies", (DL_FUNC) &_SIndexR_Sindex_CurveToSpecies, 1},
+    {"_SIndexR_Sindex_SITOSI", (DL_FUNC) &_SIndexR_Sindex_SITOSI, 3},
     {"_SIndexR_Sindex_SpecCode", (DL_FUNC) &_SIndexR_Sindex_SpecCode, 1},
     {"_SIndexR_Sindex_SpecName", (DL_FUNC) &_SIndexR_Sindex_SpecName, 1},
     {"_SIndexR_Sindex_CurveName", (DL_FUNC) &_SIndexR_Sindex_CurveName, 1},
