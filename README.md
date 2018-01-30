@@ -1,7 +1,10 @@
 # SIndexR
 The package is developed to implement key functions in Sitetools in R environment. The package is still in development and has not been fully tested and should be used with caution for now.
 
-Warning: the functions in this package MAY NOT represent the most recent functions in SiteTools. Currently, those functions are from version 1.52. 
+Warning: the functions in this package MAY NOT represent the most recent functions in SiteTools. Currently, those functions are from version 1.52.
+
+## Project status
+The project is still under development.
 
 ## To install the package
 library(devtools)
@@ -19,7 +22,7 @@ Please note that this project is released with a [Contributor Code of Conduct](h
 The source datasets used in this package come from Ken Polsson, the maintainer and developer of Sindex.
 
 ## Licence
-    # Copyright 2017 Province of British Columbia
+    # Copyright 2018 Province of British Columbia
     # 
     # Licensed under the Apache License, Version 2.0 (the "License");
     # you may not use this file except in compliance with the License.
