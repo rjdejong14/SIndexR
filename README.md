@@ -11,9 +11,9 @@ install_github("bcgov/SIndexR")
 Please file an [issue](https://github.com/bcgov/SIndexR/issues/).
 
 ## To contribute
-If you would like to contribute to the package, please see our [CONTRIBUTING](https://github.com/bcgov/SIndexR/CONTRIBUTING.md) guidelines.
+If you would like to contribute to the package, please see our [CONTRIBUTING](https://github.com/bcgov/SIndexR/blob/master/CONTRIBUTING.md) guidelines.
 
-Please note that this project is released with a [Contributor Code of Conduct](https://github.com/bcgov/SIndexR/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://github.com/bcgov/SIndexR/blob/master/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ## C Source codes
 The source datasets used in this package come from Ken Polsson, the maintainer and developer of Sindex.
