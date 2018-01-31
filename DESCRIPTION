@@ -15,4 +15,6 @@ Imports:
   rmarkdown,
   methods,
   data.table
+Suggests:
+  testthat
 LinkingTo: Rcpp
