@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "../src/sindex.h"
+#include "sindex.h"
 using namespace Rcpp;
 
 
@@ -54,7 +54,7 @@ double class_to_index (
   {
     return SI_ERR_CLASS;
   }
-  
+
   switch (sp_index)
   {
   case SI_SPEC_ACT:
@@ -256,6 +256,6 @@ double class_to_index (
   }
     break;
   }
-  
+
   return SI_ERR_SPEC;
 }

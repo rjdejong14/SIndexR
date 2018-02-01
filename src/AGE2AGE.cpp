@@ -1,11 +1,11 @@
 #include <Rcpp.h>
 #include <stdio.h>
 #include <math.h>
-#include "../src/sindex.h"
+#include "sindex.h"
 using namespace Rcpp;
 
 // This is a simple example of exporting a C++ function to R. You can
-// source this function into an R session using the Rcpp::sourceCpp 
+// source this function into an R session using the Rcpp::sourceCpp
 // function (or via the Source button on the editor toolbar). Learn
 // more about Rcpp at:
 //
@@ -42,8 +42,6 @@ using namespace Rcpp;
  * 2010 mar 4  - Added Nigh's 2009 Ba.
  */
 
-
-
 // [[Rcpp::export]]
 double age_to_age (
     short int cu_index,
@@ -53,8 +51,8 @@ double age_to_age (
     double y2bh)
 {
   double rvalue;
-  
-  
+
+
   switch (cu_index)
   {
 #ifdef SI_ACB_HUANGAC
@@ -178,10 +176,10 @@ double age_to_age (
         rvalue = 0;
       return rvalue;
     }
-    
+
     return SI_ERR_AGE_TYPE;
   }
-    
+
     if (age1_type == SI_AT_TOTAL)
     {
       if (age2_type == SI_AT_BREAST)
@@ -192,11 +190,11 @@ double age_to_age (
           rvalue = 0;
         return rvalue;
       }
-      
+
       return SI_ERR_AGE_TYPE;
     }
     break;
-    
+
   default:
     if (age1_type == SI_AT_BREAST)
     {
@@ -208,10 +206,10 @@ double age_to_age (
           rvalue = 0;
         return rvalue;
       }
-      
+
       return SI_ERR_AGE_TYPE;
     }
-    
+
     if (age1_type == SI_AT_TOTAL)
     {
       if (age2_type == SI_AT_BREAST)
@@ -222,11 +220,11 @@ double age_to_age (
           rvalue = 0;
         return rvalue;
       }
-      
+
       return SI_ERR_AGE_TYPE;
     }
     break;
   }
-  
+
   return SI_ERR_AGE_TYPE;
 }

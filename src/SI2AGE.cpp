@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include <stdio.h>
 #include <math.h>
-#include "../src/sindex.h"
+#include "sindex.h"
 using namespace Rcpp;
 
 
@@ -105,46 +105,46 @@ double index_to_age (
   double ht5, ht10;
 #endif
   double age;
-  
-  
+
+
 #ifdef TEST
   testfile = fopen ("si2age.tst", "w");
 #endif
-  
+
   if (site_height < 1.3)
   {
     if (age_type == SI_AT_BREAST)
       return SI_ERR_LT13;
-    
+
     if (site_height <= 0.0001)
       return 0;
   }
-  
+
   if (site_index < 1.3)
     return SI_ERR_LT13;
-  
+
   switch (cu_index)
   {
 #ifdef SI_FDC_BRUCE
   case SI_FDC_BRUCE:
     // 2009 may 6: force a non-rounded y2bh
     y2bh = 13.25 - site_index / 6.096;
-    
+
     x1 = site_index / 30.48;
     x2 = -0.477762 + x1 * (-0.894427 + x1 * (0.793548 - x1 * 0.171666));
     x3 = PPOW (50.0+y2bh, x2);
     x4 = LLOG (1.372 / site_index) / (PPOW (y2bh, x2) - x3);
-    
+
     x1 = LLOG (site_height / site_index) / x4 + x3;
     if (x1 < 0)
       age = SI_ERR_NO_ANS;
     else
     {
       age = PPOW (x1, 1 / x2);
-      
+
       if (age_type == SI_AT_BREAST)
         age -= y2bh;
-      
+
       if (age < 0.0)
         age = 0.0;
       else if (age > MAX_AGE)
@@ -152,12 +152,12 @@ double index_to_age (
     }
     break;
 #endif
-    
+
 #ifdef SI_SW_HU_GARCIA
   case SI_SW_HU_GARCIA:
   {
     double q;
-    
+
     q = hu_garcia_q (site_index, 50.0);
     age = hu_garcia_bha (q, site_height);
     if (age_type == SI_AT_TOTAL)
@@ -165,27 +165,27 @@ double index_to_age (
   }
     break;
 #endif
-    
+
 #ifdef SI_HWC_WILEY
 #undef WILEY
 #define WILEY 1
   case SI_HWC_WILEY:
 #endif
-    
+
 #ifdef SI_HM_WILEY
 #undef WILEY
 #define WILEY 1
   case SI_HM_WILEY:
 #endif
-    
+
 #ifdef WILEY
     if (site_height / 0.3048 < 4.5)
     {
       age = y2bh * PPOW (site_height / 1.37, 0.5);
-      
+
       if (age_type == SI_AT_BREAST)
         age -= y2bh;
-      
+
       if (age < 0.0)
         age = 0.0;
     }
@@ -195,35 +195,35 @@ double index_to_age (
       x2 = -1.7307 + 0.1394 * x1;
       x3 = -0.0616 + 0.0137 * x1;
       x4 = 0.00192428 + 0.00007024 * x1;
-      
+
       x1 = (4.5 - site_height / 0.3048);
       a = 1 + x1 * x4;
       b = x1 * x3;
       c = x1 * x2;
-      
+
       x1 = PPOW (b * b - 4 * a * c, 0.5);
       if (x1 == 0.0)
         age = SI_ERR_NO_ANS;
       else
       {
         age = (-b + x1) / (2 * a);
-        
+
         if (age_type == SI_AT_TOTAL)
           age += y2bh;
-        
+
         if (age < 0)
           age = SI_ERR_NO_ANS;
         else if (age > MAX_AGE)
           age = SI_ERR_NO_ANS;
       }
     }
-    
+
     if (age < 10 && age > 0)
     {
       age = iterate (cu_index, site_height, age_type, site_index, y2bh);
 #ifdef HOOP
       ht5 = index_to_height (cu_index, 5.0, SI_AT_BREAST, site_index, y2bh, 0.5); // 0.5 may have to change
-      
+
       if (site_height <= ht5)
         site_height -= (1 - ((ht5 - site_height) / ht5)) * 1.5;
       else
@@ -235,69 +235,69 @@ double index_to_age (
     }
     break;
 #endif
-    
+
 #ifdef SI_PLI_GOUDIE_DRY
 #undef GOUDIE
 #define GOUDIE 1
   case SI_PLI_GOUDIE_DRY:
 #endif
-    
+
 #ifdef SI_PLI_GOUDIE_WET
 #undef GOUDIE
 #define GOUDIE 1
   case SI_PLI_GOUDIE_WET:
 #endif
-    
+
 #ifdef SI_PF_GOUDIE_DRY
 #undef GOUDIE
 #define GOUDIE 1
   case SI_PF_GOUDIE_DRY:
 #endif
-    
+
 #ifdef SI_PF_GOUDIE_WET
 #undef GOUDIE
 #define GOUDIE 1
   case SI_PF_GOUDIE_WET:
 #endif
-    
+
 #ifdef SI_SS_GOUDIE
 #undef GOUDIE
 #define GOUDIE 1
   case SI_SS_GOUDIE:
 #endif
-    
+
 #ifdef SI_SE_GOUDIE_PLA
 #undef GOUDIE
 #define GOUDIE 1
   case SI_SE_GOUDIE_PLA:
 #endif
-    
+
 #ifdef SI_SE_GOUDIE_NAT
 #undef GOUDIE
 #define GOUDIE 1
   case SI_SE_GOUDIE_NAT:
 #endif
-    
+
 #ifdef SI_SW_GOUDIE_PLA
 #undef GOUDIE
 #define GOUDIE 1
   case SI_SW_GOUDIE_PLA:
 #endif
-    
+
 #ifdef SI_SW_GOUDIE_NAT
 #undef GOUDIE
 #define GOUDIE 1
   case SI_SW_GOUDIE_NAT:
 #endif
-    
+
 #ifdef GOUDIE
     if (site_height < 1.3)
     {
       age = y2bh * PPOW (site_height / 1.3, 0.5);
-      
+
       if (age_type == SI_AT_BREAST)
         age -= y2bh;
-      
+
       if (age < 0.0)
         age = 0.0;
     }
@@ -312,7 +312,7 @@ double index_to_age (
         x3 = -1.28517;
         break;
 #endif
-        
+
 #ifdef SI_PF_GOUDIE_WET
       case SI_PF_GOUDIE_WET:
         x1 = -0.935;
@@ -320,7 +320,7 @@ double index_to_age (
         x3 = -1.28517;
         break;
 #endif
-        
+
 #ifdef SI_PLI_GOUDIE_DRY
       case SI_PLI_GOUDIE_DRY:
         x1 = -1.00726;
@@ -328,7 +328,7 @@ double index_to_age (
         x3 = -1.28517;
         break;
 #endif
-        
+
 #ifdef SI_PLI_GOUDIE_WET
       case SI_PLI_GOUDIE_WET:
         x1 = -0.935;
@@ -336,7 +336,7 @@ double index_to_age (
         x3 = -1.28517;
         break;
 #endif
-        
+
 #ifdef SI_SS_GOUDIE
       case SI_SS_GOUDIE:
         x1 = -1.5282;
@@ -344,7 +344,7 @@ double index_to_age (
         x3 = -1.5108;
         break;
 #endif
-        
+
 #ifdef SI_SE_GOUDIE_PLA
       case SI_SE_GOUDIE_PLA:
         x1 = -1.2866;
@@ -352,7 +352,7 @@ double index_to_age (
         x3 = -1.4661;
         break;
 #endif
-        
+
 #ifdef SI_SE_GOUDIE_NAT
       case SI_SE_GOUDIE_NAT:
         x1 = -1.2866;
@@ -360,7 +360,7 @@ double index_to_age (
         x3 = -1.4661;
         break;
 #endif
-        
+
 #ifdef SI_SW_GOUDIE_PLA
       case SI_SW_GOUDIE_PLA:
         x1 = -1.2866;
@@ -368,7 +368,7 @@ double index_to_age (
         x3 = -1.4661;
         break;
 #endif
-        
+
 #ifdef SI_SW_GOUDIE_NAT
       case SI_SW_GOUDIE_NAT:
         x1 = -1.2866;
@@ -380,12 +380,12 @@ double index_to_age (
       a = (site_index - 1.3) *
         (1 + exp (x2 + x1 * LLOG (site_index - 1.3) + x3 * log (50.0)));
       b = x2 + x1 * LLOG (site_index - 1.3);
-      
+
       age = exp ((LLOG (a / (site_height - 1.3) - 1) - b) / x3);
-      
+
       if (age_type == SI_AT_TOTAL)
         age += y2bh;
-      
+
       if (age < 0)
         age = 0;
       else if (age > MAX_AGE)
@@ -393,91 +393,91 @@ double index_to_age (
     }
     break;
 #endif
-    
+
 #ifdef SI_BL_THROWERGI
   case SI_BL_THROWERGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_CWI_NIGHGI
   case SI_CWI_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_FDC_NIGHGI
   case SI_FDC_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_FDI_NIGHGI
   case SI_FDI_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_HWC_NIGHGI
   case SI_HWC_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_HWC_NIGHGI99
   case SI_HWC_NIGHGI99:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_HWI_NIGHGI
   case SI_HWI_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_LW_NIGHGI
   case SI_LW_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_PLI_NIGHGI
   case SI_PLI_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_PLI_NIGHGI97
   case SI_PLI_NIGHGI97:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_SS_NIGHGI
   case SI_SS_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_SS_NIGHGI99
   case SI_SS_NIGHGI99:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_SW_NIGHGI
   case SI_SW_NIGHGI:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
 #ifdef SI_SW_NIGHGI99
   case SI_SW_NIGHGI99:
     age = gi_iterate (cu_index, site_height, age_type, site_index);
     break;
 #endif
-    
+
   default:
 #ifdef TEST
       fprintf (testfile, "before iterate()\n");
@@ -485,7 +485,7 @@ double index_to_age (
     age = iterate (cu_index, site_height, age_type, site_index, y2bh);
     break;
   }
-  
+
 #ifdef TEST
   fprintf (testfile, "final age: %f", age);
   fclose (testfile);
@@ -505,23 +505,23 @@ static double iterate (
   double step;
   double test_ht;
   short int err_count;
-  
-  
+
+
   /* initial guess */
   si2age = 25;
   step = si2age / 2;
   err_count = 0;
-  
+
   /* do a preliminary test to catch some obvious errors */
   test_ht = index_to_height (cu_index, si2age, SI_AT_TOTAL, site_index, y2bh, 0.5); // 0.5 may have to change
-  
+
   if (test_ht == SI_ERR_CURVE ||
       test_ht == SI_ERR_LT13 ||
       test_ht == SI_ERR_GI_MIN ||
       test_ht == SI_ERR_GI_MAX ||
       test_ht == SI_ERR_GI_TOT)
     return test_ht;
-  
+
   /* loop until real close, or other end condition */
   do
   {
@@ -533,9 +533,9 @@ static double iterate (
 #ifdef TEST
     fprintf (testfile, "index_to_height()=%f\n", test_ht);
 #endif
-    
+
     //printf ("si2age.c: site_height=%f, test_ht=%f, si2age=%f\n", site_height, test_ht, si2age);
-    
+
     if (test_ht == SI_ERR_NO_ANS) /* height > 999 */
     {
       test_ht = 1000; /* should eventualy force an error code */
@@ -546,7 +546,7 @@ static double iterate (
     break;
   }
     }
-    
+
     /* see if we're close enough */
     if ((test_ht - site_height > 0.005) ||
     (test_ht - site_height < -0.005))
@@ -567,7 +567,7 @@ static double iterate (
     else
       /* done */
       break;
-    
+
     /* check for lack of convergence, so we're not here forever */
     if (step < 0.00001 && step > -0.00001)
     {
@@ -583,7 +583,7 @@ static double iterate (
       break;
     }
   } while (1);
-  
+
   if (si2age >= 0)
     if (age_type == SI_AT_BREAST)
       /* was
@@ -605,11 +605,11 @@ static double gi_iterate (
   double test_site;
   double diff;
   double mindiff;
-  
-  
+
+
   if (age_type == SI_AT_TOTAL)
     return SI_ERR_GI_TOT;
-  
+
   diff = 0;
   mindiff = 999;
   si2age = 1;
@@ -625,19 +625,19 @@ static double gi_iterate (
 #endif
     if (test_site == SI_ERR_GI_MAX)
       break;
-    
+
     if (test_site > site_index)
       diff = test_site - site_index;
     else
       diff = site_index - test_site;
-    
+
     if (diff < mindiff)
     {
       mindiff = diff;
       si2age = age;
     }
   }
-  
+
   if (si2age == 1)
   {
     /* right answer, or not low enough */
@@ -647,7 +647,7 @@ static double gi_iterate (
       return SI_ERR_NO_ANS;
     }
   }
-  
+
   else if (si2age == age-1)
   {
     /* right answer, or not high enough */
@@ -657,7 +657,7 @@ static double gi_iterate (
       return SI_ERR_NO_ANS;
     }
   }
-  
+
   return si2age;
 }
 
@@ -665,13 +665,13 @@ static double gi_iterate (
 static double hu_garcia_q (double site_index, double bhage)
 {
   double h, q, step, diff, lastdiff;
-  
-  
+
+
   q = 0.02;
   step = 0.01;
   lastdiff = 0;
   diff = 0;
-  
+
   do
   {
     h = hu_garcia_h (q, bhage);
@@ -696,7 +696,7 @@ static double hu_garcia_q (double site_index, double bhage)
     if (step < 0.0000001)
       break;
   } while (1);
-  
+
   return q;
 }
 
@@ -704,8 +704,8 @@ static double hu_garcia_q (double site_index, double bhage)
 static double hu_garcia_h (double q, double bhage)
 {
   double a, height;
-  
-  
+
+
   a = 283.9 * pow (q, 0.5137);
   height = a * pow (1 - (1 - pow (1.3 / a, 0.5829)) * exp (-q * (bhage - 0.5)), 1.71556);
   return height;
@@ -715,8 +715,8 @@ static double hu_garcia_h (double q, double bhage)
 static double hu_garcia_bha (double q, double height)
 {
   double a, bhage;
-  
-  
+
+
   a = 283.9 * pow (q, 0.5137);
   bhage = 0.5 - 1 / q * log ((1 - pow (height / a, 0.5829)) / (1 - pow (1.3 / a, 0.5829)));
   return bhage;

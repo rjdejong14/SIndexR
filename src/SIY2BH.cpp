@@ -1,6 +1,6 @@
 #include <Rcpp.h>
 #include <math.h>
-#include "../src/sindex.h"
+#include "sindex.h"
 using namespace Rcpp;
 
 /*
@@ -167,11 +167,11 @@ double si_y2bh (short int cu_index, double site_index)
 {
   double y2bh;
   double si20;
-  
-  
+
+
   if (site_index < 1.3)
     return SI_ERR_LT13;
-  
+
   switch (cu_index)
   {
 #ifdef SI_FDC_NIGHGI
@@ -179,7 +179,7 @@ double si_y2bh (short int cu_index, double site_index)
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_FDC_BRUCE
   case SI_FDC_BRUCE:
     /* from seed */
@@ -188,7 +188,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_FDC_BRUCEAC
   case SI_FDC_BRUCEAC:
     /* from seed */
@@ -197,7 +197,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_FDC_NIGHTA
   case SI_FDC_NIGHTA:
     if (site_index <= 9.051)
@@ -206,7 +206,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 24.44 * pow (site_index - 9.051, -0.394);
     break;
 #endif
-    
+
 #ifdef SI_FDC_BRUCENIGH
   case SI_FDC_BRUCENIGH:
     /* changed 2002 AUG 20 */
@@ -220,7 +220,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 36.5818 * pow (site_index - 6.6661, -0.5526);
     break;
 #endif
-    
+
 #ifdef SI_FDC_COCHRAN
   case SI_FDC_COCHRAN:
     /*
@@ -232,7 +232,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_FDC_KING
   case SI_FDC_KING:
     /* from seed */
@@ -241,7 +241,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HWC_FARR
   case SI_HWC_FARR:
     /*
@@ -253,7 +253,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HWC_BARKER
   case SI_HWC_BARKER:
     y2bh = -5.2 + 410.00 / site_index;
@@ -261,7 +261,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HM_MEANS
   case SI_HM_MEANS:
     /* copied from Hw Wiley 1978 */
@@ -271,7 +271,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HM_MEANSAC
   case SI_HM_MEANSAC:
     /* copied from Hw Wiley 1978 */
@@ -281,7 +281,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HM_WILEY
   case SI_HM_WILEY:
     /* copied from Hw Wiley 1978 */
@@ -291,7 +291,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HWI_NIGH
   case SI_HWI_NIGH:
     /* from seed */
@@ -300,49 +300,49 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HWI_NIGHGI
   case SI_HWI_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_HWC_NIGHGI
   case SI_HWC_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_HWC_NIGHGI99
   case SI_HWC_NIGHGI99:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_SS_NIGHGI99
   case SI_SS_NIGHGI99:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_SW_NIGHGI99
   case SI_SW_NIGHGI99:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_SW_NIGHGI2004
   case SI_SW_NIGHGI2004:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_LW_NIGHGI
   case SI_LW_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_HWC_WILEY
   case SI_HWC_WILEY:
     /* seed (root collar) */
@@ -351,7 +351,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HWC_WILEYAC
   case SI_HWC_WILEYAC:
     /* seed (root collar) */
@@ -360,7 +360,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HWC_WILEY_BC
   case SI_HWC_WILEY_BC:
     /* seed (root collar) */
@@ -369,7 +369,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_HWC_WILEY_MB
   case SI_HWC_WILEY_MB:
     /* seed (root collar) */
@@ -378,7 +378,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_PF_GOUDIE_DRY
   case SI_PF_GOUDIE_DRY:
     /* copied from Pli Goudie */
@@ -386,7 +386,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PF_GOUDIE_WET
   case SI_PF_GOUDIE_WET:
     /* copied from Pli Goudie */
@@ -394,61 +394,61 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PJ_HUANG_PLA
   case SI_PJ_HUANG_PLA:
     /* from seed */
     y2bh = 3.5 + 1.872138 + 49.555513 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PJ_HUANG_NAT
   case SI_PJ_HUANG_NAT:
     /* from seed */
     y2bh = 5 + 1.872138 + 49.555513 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PJ_HUANG
   case SI_PJ_HUANG:
     /* from seed */
     y2bh = 5 + 1.872138 + 49.555513 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PJ_HUANGAC
   case SI_PJ_HUANGAC:
     /* from seed */
     y2bh = 5 + 1.872138 + 49.555513 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_NIGHGI
   case SI_PLI_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_PLI_NIGHGI97
   case SI_PLI_NIGHGI97:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_PLI_HUANG_PLA
   case SI_PLI_HUANG_PLA:
     /* from seed */
     y2bh = 3.5 + 1.740006 + 58.83891 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_HUANG_NAT
   case SI_PLI_HUANG_NAT:
     /* from seed */
     y2bh = 5 + 1.740006 + 58.83891 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_NIGHTA2004
   case SI_PLI_NIGHTA2004:
     /* temporarily copied from PLI_NIGHTA98 */
@@ -458,7 +458,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 21.6623 * PPOW (site_index - 9.05671, -0.550762);
     break;
 #endif
-    
+
 #ifdef SI_PLI_NIGHTA98
   case SI_PLI_NIGHTA98:
     if (site_index < 9.5)
@@ -467,7 +467,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 21.6623 * PPOW (site_index - 9.05671, -0.550762);
     break;
 #endif
-    
+
 #ifdef SI_SW_GOUDNIGH
   case SI_SW_GOUDNIGH:
     if (site_index < 19.5)
@@ -483,7 +483,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 35.87 * PPOW (site_index - 9.726, -0.5409);
     break;
 #endif
-    
+
 #ifdef SI_SW_NIGHTA2004
   case SI_SW_NIGHTA2004:
     /* temporarily copied from SW_NIGHTA */
@@ -494,7 +494,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 35.87 * PPOW (site_index - 9.726, -0.5409);
     break;
 #endif
-    
+
 #ifdef SI_SW_HU_GARCIA
   case SI_SW_HU_GARCIA:
     /* temporarily copied from SW_NIGHTA */
@@ -505,7 +505,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 35.87 * PPOW (site_index - 9.726, -0.5409);
     break;
 #endif
-    
+
 #ifdef SI_SW_NIGHTA
   case SI_SW_NIGHTA:
     if (site_index < 14.2)
@@ -515,14 +515,14 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 35.87 * PPOW (site_index - 9.726, -0.5409);
     break;
 #endif
-    
+
 #ifdef SI_SE_NIGH
   case SI_SE_NIGH:
     /* copied from SW_GOUDIE_NATAC */
     y2bh = 6.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SE_NIGHTA
   case SI_SE_NIGHTA:
     /* copied from SW_NIGHTA */
@@ -533,13 +533,13 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 35.87 * PPOW (site_index - 9.726, -0.5409);
     break;
 #endif
-    
+
 #ifdef SI_SE_NIGHGI
   case SI_SE_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_PLI_THROWNIGH
   case SI_PLI_THROWNIGH:
     if (site_index < 18.5)
@@ -553,7 +553,7 @@ double si_y2bh (short int cu_index, double site_index)
     */
     break;
 #endif
-    
+
 #ifdef SI_PLI_NIGH
   case SI_PLI_NIGH:
     if (site_index < 18.5)
@@ -567,14 +567,14 @@ double si_y2bh (short int cu_index, double site_index)
     */
     break;
 #endif
-    
+
 #ifdef SI_PLI_THROWER
   case SI_PLI_THROWER:
     /* from seed */
     y2bh = 2 + 0.55 + 69.4 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_MILNER
   case SI_PLI_MILNER:
     /*
@@ -584,7 +584,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_CIESZEWSKI
   case SI_PLI_CIESZEWSKI:
     /*
@@ -594,28 +594,28 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_GOUDIE_DRY
   case SI_PLI_GOUDIE_DRY:
     /* from seed */
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_GOUDIE_WET
   case SI_PLI_GOUDIE_WET:
     /* from seed */
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PLI_DEMPSTER
   case SI_PLI_DEMPSTER:
     /* from seed */
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PL_CHEN
   case SI_PL_CHEN:
     /*
@@ -626,7 +626,7 @@ double si_y2bh (short int cu_index, double site_index)
     break;
     break;
 #endif
-    
+
 #ifdef SI_SE_CHEN
   case SI_SE_CHEN:
     /* copied from Sw Goudie (natural) */
@@ -634,7 +634,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 6.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SE_CHENAC
   case SI_SE_CHENAC:
     /* copied from Sw Goudie (natural) */
@@ -642,7 +642,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 6.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SE_GOUDIE_PLA
   case SI_SE_GOUDIE_PLA:
     /* copied from Sw Goudie */
@@ -650,7 +650,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SE_GOUDIE_NAT
   case SI_SE_GOUDIE_NAT:
     /* copied from Sw Goudie */
@@ -658,82 +658,82 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 6.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_NIGHGI
   case SI_SW_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_SW_HUANG_PLA
   case SI_SW_HUANG_PLA:
     /* from seed */
     y2bh = 4.5 + 4.3473 + 59.908359 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_HUANG_NAT
   case SI_SW_HUANG_NAT:
     /* from seed */
     y2bh = 8 + 4.3473 + 59.908359 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_THROWER
   case SI_SW_THROWER:
     /* from seed */
     y2bh = 4 + 0.38 + 117.34 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_KER_PLA
   case SI_SW_KER_PLA:
     /* from seed */
     y2bh = 2.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_KER_NAT
   case SI_SW_KER_NAT:
     /* from seed */
     y2bh = 6.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_GOUDIE_PLA
   case SI_SW_GOUDIE_PLA:
     /* from seed */
     y2bh = 2.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_GOUDIE_NAT
   case SI_SW_GOUDIE_NAT:
     /* from seed */
     y2bh = 6.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_GOUDIE_PLAAC
   case SI_SW_GOUDIE_PLAAC:
     /* from seed */
     y2bh = 2.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_GOUDIE_NATAC
   case SI_SW_GOUDIE_NATAC:
     /* from seed */
     y2bh = 6.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_DEMPSTER
   case SI_SW_DEMPSTER:
     y2bh = 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SW_CIESZEWSKI
   case SI_SW_CIESZEWSKI:
     /*
@@ -743,14 +743,14 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SB_HUANG
   case SI_SB_HUANG:
     /* from seed */
     y2bh = 8 + 2.288325 + 80.774008 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SB_KER
   case SI_SB_KER:
     /*
@@ -760,7 +760,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 7.0 + 4.0427 + 61.08 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SB_DEMPSTER
   case SI_SB_DEMPSTER:
     /*
@@ -770,7 +770,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 7.0 + 4.0427 + 61.08 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SB_NIGH
   case SI_SB_NIGH:
     /*
@@ -780,7 +780,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 7.0 + 4.0427 + 61.08 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SB_CIESZEWSKI
   case SI_SB_CIESZEWSKI:
     /*
@@ -790,7 +790,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 7.0 + 4.0427 + 61.08 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_SS_GOUDIE
   case SI_SS_GOUDIE:
     /* from seed */
@@ -799,13 +799,13 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_SS_NIGHGI
   case SI_SS_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_SS_NIGH
   case SI_SS_NIGH:
     /* copied from Ss Goudie */
@@ -815,7 +815,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_SS_FARR
   case SI_SS_FARR:
     /*
@@ -827,7 +827,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_SS_BARKER
   case SI_SS_BARKER:
     y2bh = -5.13 + 450.00 / site_index;
@@ -835,13 +835,13 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_CWI_NIGHGI
   case SI_CWI_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_CWI_NIGH
   case SI_CWI_NIGH:
     /* from seed */
@@ -850,7 +850,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_CWC_KURUCZ
   case SI_CWC_KURUCZ:
     /*
@@ -862,7 +862,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_CWC_KURUCZAC
   case SI_CWC_KURUCZAC:
     /*
@@ -874,7 +874,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_CWC_BARKER
   case SI_CWC_BARKER:
     y2bh = -3.46 + 285.00 / site_index;
@@ -882,7 +882,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_CWC_NIGH
   case SI_CWC_NIGH:
     /*
@@ -894,7 +894,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_BA_DILUCCA
   case SI_BA_DILUCCA:
     /*
@@ -906,7 +906,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BB_KER
   case SI_BB_KER:
     /* from seed */
@@ -915,7 +915,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BP_CURTIS
   case SI_BP_CURTIS:
     /* from seed */
@@ -924,7 +924,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BP_CURTISAC
   case SI_BP_CURTISAC:
     /* copied from BP_CURTIS */
@@ -933,13 +933,13 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BA_NIGHGI
   case SI_BA_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_BA_NIGH
   case SI_BA_NIGH:
     /*
@@ -951,7 +951,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BA_KURUCZ86
   case SI_BA_KURUCZ86:
     /* from seed */
@@ -960,7 +960,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BA_KURUCZ82
   case SI_BA_KURUCZ82:
     /* from seed */
@@ -969,7 +969,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BA_KURUCZ82AC
   case SI_BA_KURUCZ82AC:
     /* from seed */
@@ -978,7 +978,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BL_CHEN
   case SI_BL_CHEN:
     /*
@@ -990,7 +990,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BL_CHENAC
   case SI_BL_CHENAC:
     /*
@@ -1002,13 +1002,13 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BL_THROWERGI
   case SI_BL_THROWERGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_BL_KURUCZ82
   case SI_BL_KURUCZ82:
     /*
@@ -1020,7 +1020,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BC_KURUCZ82
   case SI_BC_KURUCZ82:
     /*
@@ -1032,7 +1032,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_BG_KURUCZ82
   case SI_BG_KURUCZ82:
     /*
@@ -1044,27 +1044,27 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 5.0;
     break;
 #endif
-    
+
 #ifdef SI_FDI_NIGHGI
   case SI_FDI_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_FDI_HUANG_PLA
   case SI_FDI_HUANG_PLA:
     /* from seed */
     y2bh = 6.5 + 5.276585 + 38.968242 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_FDI_HUANG_NAT
   case SI_FDI_HUANG_NAT:
     /* from seed */
     y2bh = 8 + 5.276585 + 38.968242 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_FDI_MILNER
   case SI_FDI_MILNER:
     /*
@@ -1074,14 +1074,14 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 4.0 + 99.0 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_FDI_THROWER
   case SI_FDI_THROWER:
     /* from seed */
     y2bh = 4.0 + 99.0 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_FDI_THROWERAC
   case SI_FDI_THROWERAC:
     /* copied from FDI_THROWER */
@@ -1089,21 +1089,21 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 4.0 + 99.0 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_FDI_VDP_MONT
   case SI_FDI_VDP_MONT:
     /* from seed */
     y2bh = 4.0 + 99.0 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_FDI_VDP_WASH
   case SI_FDI_VDP_WASH:
     /* from seed */
     y2bh = 4.0 + 99.0 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_FDI_MONS_DF
   case SI_FDI_MONS_DF:
     y2bh = 16.0 - site_index / 3.0;
@@ -1111,7 +1111,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 8.0;
     break;
 #endif
-    
+
 #ifdef SI_FDI_MONS_GF
   case SI_FDI_MONS_GF:
     y2bh = 16.0 - site_index / 3.0;
@@ -1119,7 +1119,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 8.0;
     break;
 #endif
-    
+
 #ifdef SI_FDI_MONS_WRC
   case SI_FDI_MONS_WRC:
     y2bh = 16.0 - site_index / 3.0;
@@ -1127,7 +1127,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 8.0;
     break;
 #endif
-    
+
 #ifdef SI_FDI_MONS_WH
   case SI_FDI_MONS_WH:
     y2bh = 16.0 - site_index / 3.0;
@@ -1135,7 +1135,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 8.0;
     break;
 #endif
-    
+
 #ifdef SI_FDI_MONS_SAF
   case SI_FDI_MONS_SAF:
     y2bh = 16.0 - site_index / 3.0;
@@ -1143,7 +1143,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 8.0;
     break;
 #endif
-    
+
 #ifdef SI_AT_NIGH
   case SI_AT_NIGH:
     /*
@@ -1152,7 +1152,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_AT_CHEN
   case SI_AT_CHEN:
     /*
@@ -1161,20 +1161,20 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_AT_HUANG
   case SI_AT_HUANG:
     /* from seed */
     y2bh = 1 + 2.184066 + 50.788746 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_AT_GOUDIE
   case SI_AT_GOUDIE:
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_ACB_HUANG
   case SI_ACB_HUANG:
     /* from seed */
@@ -1183,7 +1183,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_ACB_HUANGAC
   case SI_ACB_HUANGAC:
     /* copied from ACB_HUANG */
@@ -1193,26 +1193,26 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_ACT_THROWER
   case SI_ACT_THROWER:
     y2bh = 2;
     break;
 #endif
-    
+
 #ifdef SI_ACT_THROWERAC
   case SI_ACT_THROWERAC:
     y2bh = 2;
     break;
 #endif
-    
+
 #ifdef SI_MB_THROWER
   case SI_MB_THROWER:
     /* copied from ACT_THROWER */
     y2bh = 2;
     break;
 #endif
-    
+
 #ifdef SI_AT_CIESZEWSKI
   case SI_AT_CIESZEWSKI:
     /*
@@ -1221,7 +1221,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_DR_HARRING
   case SI_DR_HARRING:
     si20 = PPOW (site_index, 1.5) / 8.0;
@@ -1231,7 +1231,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 2.0;
     break;
 #endif
-    
+
 #ifdef SI_DR_CHEN
   case SI_DR_CHEN:
     /* copied from Dr Harrington */
@@ -1242,12 +1242,12 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 2.0;
     break;
 #endif
-    
+
 #ifdef SI_DR_NIGH
   case SI_DR_NIGH:
   {
     double si25;
-    
+
     si25 = 0.3094 + 0.7616 * site_index;
     if (si25 <= 25)
       y2bh = 5.494 - 0.1789 * si25;
@@ -1256,32 +1256,32 @@ double si_y2bh (short int cu_index, double site_index)
   }
     break;
 #endif
-    
+
 #ifdef SI_BB_HUANG
   case SI_BB_HUANG:
     /* from seed */
     y2bh = 8 + 8.299433 +  59.302950 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_BG_COCHRAN
   case SI_BG_COCHRAN:
     y2bh = 1.331 + 11.75 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PY_NIGHGI
   case SI_PY_NIGHGI:
     return SI_ERR_GI_TOT;
     break;
 #endif
-    
+
 #ifdef SI_PY_NIGH
   case SI_PY_NIGH:
     y2bh = 36.35 * pow (0.9318, site_index);
     break;
 #endif
-    
+
 #ifdef SI_PY_HANN
   case SI_PY_HANN:
     /*
@@ -1291,7 +1291,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PY_HANNAC
   case SI_PY_HANNAC:
     /*
@@ -1301,7 +1301,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PY_MILNER
   case SI_PY_MILNER:
     /*
@@ -1311,7 +1311,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_LA_MILNER
   case SI_LA_MILNER:
     /*
@@ -1321,7 +1321,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 3.36 + 87.18 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_LT_MILNER
   case SI_LT_MILNER:
     /*
@@ -1331,7 +1331,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 3.36 + 87.18 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_LW_MILNER
   case SI_LW_MILNER:
     /*
@@ -1341,7 +1341,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 3.36 + 87.18 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_LW_NIGH
   case SI_LW_NIGH:
     /*
@@ -1351,7 +1351,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 3.36 + 87.18 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_EA_GOUDIE
   case SI_EA_GOUDIE:
     /*
@@ -1360,13 +1360,13 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_EP_CAMERON
   case SI_EP_CAMERON:
     y2bh = 4;
     break;
 #endif
-    
+
 #ifdef SI_EP_CHEN
   case SI_EP_CHEN:
     /*
@@ -1375,7 +1375,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_EP_GOUDIE
   case SI_EP_GOUDIE:
     /*
@@ -1384,7 +1384,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_EP_NIGH
   case SI_EP_NIGH:
     /*
@@ -1393,7 +1393,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 1.331 + 38.56 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PW_CURTIS
   case SI_PW_CURTIS:
     /*
@@ -1402,7 +1402,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PW_CURTISAC
   case SI_PW_CURTISAC:
     /*
@@ -1411,7 +1411,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2.0 + 2.1578 + 110.76 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PA_GOUDIE_DRY
   case SI_PA_GOUDIE_DRY:
     /*
@@ -1421,7 +1421,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_PA_GOUDIE_WET
   case SI_PA_GOUDIE_WET:
     /*
@@ -1431,7 +1431,7 @@ double si_y2bh (short int cu_index, double site_index)
     y2bh = 2 + 3.6 + 42.64 / site_index;
     break;
 #endif
-    
+
 #ifdef SI_YC_KURUCZ
   case SI_YC_KURUCZ:
     /*
@@ -1446,7 +1446,7 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
 #ifdef SI_TE_GOUDIE
   case SI_TE_GOUDIE:
     y2bh = 5.063 - 0.1797 * site_index;
@@ -1454,11 +1454,11 @@ double si_y2bh (short int cu_index, double site_index)
       y2bh = 1;
     break;
 #endif
-    
+
   default:
       return SI_ERR_CURVE;
   }
-  
+
   return y2bh;
 }
 
@@ -1466,10 +1466,10 @@ double si_y2bh (short int cu_index, double site_index)
 double si_y2bh05 (short int cu_index, double site_index)
 {
   double y2bh;
-  
-  
+
+
   y2bh = si_y2bh (cu_index, site_index);
-  
+
   /* force answer to be in steps 0.5, 1.5, 2.5, etc. */
   return ((int) y2bh) + 0.5;
 }

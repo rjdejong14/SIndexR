@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include <stdio.h>
 #include <math.h>
-#include "../src/sindex.h"
+#include "sindex.h"
 using namespace Rcpp;
 
 
@@ -158,8 +158,8 @@ double height_to_index (
 {
   double index;
   double x1, x2;
-  
-  
+
+
   /* handle simple cases */
   if (age_type == SI_AT_BREAST)
   {
@@ -171,10 +171,10 @@ double height_to_index (
     if (height <= 0)
       return SI_ERR_NO_ANS;
   }
-  
+
   if (age <= 0)
     return SI_ERR_NO_ANS;
-  
+
   if (age_type == SI_AT_BREAST)
     index = ba_height_to_index (cu_index, age, height, si_est_type);
   else
@@ -195,12 +195,12 @@ double height_to_index (
         {
           x1 = (age - 4) * (0.39 + 0.3104 * height);
           x2 = 33.3828 * height + x1 + 99;
-          
+
           index = (x2 + sqrt (x2 * x2 - 4 * 99 * x1)) / (2 * (age - 4));
         }
         break;
 #endif
-        
+
       default:
           index = site_iterate (cu_index, age, SI_AT_TOTAL, height);
         break;
@@ -223,8 +223,8 @@ double ba_height_to_index (
   double x1, x2;
   double log_bhage;
   double ht_13;
-  
-  
+
+
   if (bhage <= 0.5)
     index = SI_ERR_GI_MIN; /* indicator that it can't be done */
           else
@@ -242,7 +242,7 @@ double ba_height_to_index (
                       2.533284275 * LLOG (height)));
                 break;
 #endif
-                
+
 #ifdef SI_DR_NIGH
               case SI_DR_NIGH:
                 /* first compute si@bhage25 */
@@ -252,91 +252,91 @@ double ba_height_to_index (
                 index = -0.4063 + 1.313 * index;
                 break;
 #endif
-                
+
 #ifdef SI_HM_MEANS
               case SI_HM_MEANS:
                 /* computer index at base age 100 */
                 index = 1.37 + 17.22 + (0.58322 + 99.127 * PPOW (bhage, -1.18989)) *
                 (height - 1.37 - 47.926 * PPOW (1 - exp (-0.00574787 * bhage), 1.2416));
-                
+
                 /* convert to base age 50 */
                 index = PPOW ((index + 1.73) / 3.149, 1.2079);
                 break;
 #endif
-                
+
 #ifdef SI_FDI_MILNER
               case SI_FDI_MILNER:
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 index = 57.3 + (7.06 +
                   0.02275 * bhage -
                   1.858 * log (bhage) +
                   5.496 / (bhage * bhage)) *
                   (height - 4.5 -
                   114.6 * PPOW (1 - exp (-0.01462 * bhage), 1.179));
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_FDI_THROWER
               case SI_FDI_THROWER:
                 index = 0.39 + 0.3104 * height + 33.3828 * height / bhage;
                 break;
 #endif
-                
+
 #ifdef SI_PLI_THROWER
               case SI_PLI_THROWER:
                 x1 = 1 + exp (6.0925 + 0.7979 * log (50.0) - 2.7338 * log (height));
                 x2 = 1 + exp (6.0925 + 0.7979 * log (bhage) - 2.7338 * log (height));
-                
+
                 index = height * x1 /x2;
                 break;
 #endif
-                
+
 #ifdef SI_LA_MILNER
 #undef LA_MILNER
 #define LA_MILNER 1
               case SI_LA_MILNER:
 #endif
-                
+
 #ifdef SI_LT_MILNER
 #undef LT_MILNER
 #define LT_MILNER 1
               case SI_LT_MILNER:
 #endif
-                
+
 #ifdef SI_LW_MILNER
 #undef LW_MILNER
 #define LW_MILNER 1
               case SI_LW_MILNER:
 #endif
-                
+
 #ifdef LW_MILNER
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 index = 69.0 + (-0.8019 +
                   17.06 / bhage +
                   0.4268 * log (bhage) -
                   0.00009635 * bhage * bhage) *
                   (height - 4.5 -
                   127.8 * PPOW (1 - exp (-0.01655 * bhage), 1.196));
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_PLI_DEMPSTER
               case SI_PLI_DEMPSTER:
                 log_bhage = log (bhage);
-                
+
                 ht_13 = height - 1.3;
-                
-                index = 1.3 + 
+
+                index = 1.3 +
                   10.9408 +
                   1.6753 * ht_13 -
                   0.9322 * log_bhage * log_bhage +
@@ -345,74 +345,74 @@ double ba_height_to_index (
                   0.2569 * ht_13 * LLOG (ht_13);
                 break;
 #endif
-                
+
 #ifdef SI_PLI_MILNER
               case SI_PLI_MILNER:
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 index = 59.6 + (1.055 -
                   0.006344 * bhage +
                   14.82 / bhage -
                   5.212 / (bhage * bhage)) *
                   (height - 4.5 -
                   96.93 * PPOW (1 - exp (-0.01955 * bhage), 1.216));
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_PY_MILNER
               case SI_PY_MILNER:
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 index = 59.6 + (4.787 +
                   0.012544 * bhage -
                   1.141 * log (bhage) +
                   11.44 / (bhage * bhage)) *
                   (height - 4.5 -
                   121.4 * PPOW (1 - exp (-0.01756 * bhage), 1.483));
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_PW_CURTIS
               case SI_PW_CURTIS:
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 x1 = log (bhage) - log (50.0);
                 x2 = x1 * x1;
-                
+
                 index =  exp (-2.608801 * x1 - 0.715601 * x2) *
                   PPOW (height, 1.0 + 0.408404 * x1 + 0.138199 * x2);
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_SW_HU_GARCIA
               case SI_SW_HU_GARCIA:
               {
                 double q;
-                
+
                 q = hu_garcia_q (height, bhage);
                 index = hu_garcia_h (q, 50.0);
               }
                 break;
 #endif
-                
+
 #ifdef SI_SW_DEMPSTER
               case SI_SW_DEMPSTER:
                 log_bhage = log (bhage);
-                
+
                 ht_13 = height - 1.3;
-                
+
                 index = 1.3 +
                   10.3981 +
                   0.3244 * ht_13 +
@@ -422,43 +422,43 @@ double ba_height_to_index (
                   1.1914 * LLOG (ht_13);
                 break;
 #endif
-                
+
 #ifdef SI_SB_DEMPSTER
               case SI_SB_DEMPSTER:
                 log_bhage = log (bhage);
-                
+
                 ht_13 = height - 1.3;
-                
+
                 index = 1.3 +
                   4.9038 +
                   0.8118 * ht_13 -
                   0.3638 * log_bhage * log_bhage +
-                  24.0308 * ht_13 / bhage - 
+                  24.0308 * ht_13 / bhage -
                   0.1021 * ht_13 * LLOG (ht_13);
                 break;
 #endif
-                
+
 #ifdef SI_EA_GOUDIE
 #undef SI_AT_GOUDIE
 #define SI_AT_GOUDIE 1
               case SI_EA_GOUDIE:
 #endif
-                
+
 #ifdef SI_EP_GOUDIE
 #undef SI_AT_GOUDIE
 #define SI_AT_GOUDIE 1
               case SI_EP_GOUDIE:
 #endif
-                
+
 #ifdef SI_AT_GOUDIE
 #undef SI_AT_GOUDIE
 #define SI_AT_GOUDIE 1
               case SI_AT_GOUDIE:
 #endif
-                
+
 #ifdef SI_AT_GOUDIE
                 log_bhage = log (bhage);
-                
+
                 index = 1.3 +
                   17.0101 +
                   0.8784 * (height - 1.3) +
@@ -467,75 +467,75 @@ double ba_height_to_index (
                   0.4374 * LLOG (height - 1.3) / bhage;
                 break;
 #endif
-                
+
 #ifdef SI_FDI_VDP_MONT
               case SI_FDI_VDP_MONT:
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 index = 4.5 +
                   111.832 +
                   0.721 * (height - 4.5) -
                   28.2175 * log (bhage) -
                   731.551 / (bhage * bhage) +
                   13.164 * (height - 4.5) / bhage;
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_FDI_VDP_WASH
               case SI_FDI_VDP_WASH:
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 index = 4.5 +
                   146.274 +
                   0.809 * (height - 4.5) -
                   37.218 * log (bhage) -
                   1064.4055 / (bhage * bhage) +
                   9.511 * (height - 4.5) / bhage;
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_FDI_MONS_DF
 #undef MONSERUD
 #define MONSERUD 1
               case SI_FDI_MONS_DF:
 #endif
-                
+
 #ifdef SI_FDI_MONS_GF
 #undef MONSERUD
 #define MONSERUD 1
               case SI_FDI_MONS_GF:
 #endif
-                
+
 #ifdef SI_FDI_MONS_WRC
 #undef MONSERUD
 #define MONSERUD 1
               case SI_FDI_MONS_WRC:
 #endif
-                
+
 #ifdef SI_FDI_MONS_WH
 #undef MONSERUD
 #define MONSERUD 1
               case SI_FDI_MONS_WH:
 #endif
-                
+
 #ifdef SI_FDI_MONS_SAF
 #undef MONSERUD
 #define MONSERUD 1
               case SI_FDI_MONS_SAF:
 #endif
-                
+
 #ifdef MONSERUD
                 /* convert to imperial */
                 height /= 0.3048;
-                
+
                 switch (cu_index)
                 {
 #ifdef SI_FDI_MONS_DF
@@ -544,28 +544,28 @@ double ba_height_to_index (
                   x2 = 25.315;
                   break;
 #endif
-                  
+
 #ifdef SI_FDI_MONS_GF
                 case SI_FDI_MONS_GF:
                   x1 = 0.4305;
                   x2 = 28.415;
                   break;
 #endif
-                  
+
 #ifdef SI_FDI_MONS_WRC
                 case SI_FDI_MONS_WRC:
                   x1 = 0.4305;
                   x2 = 28.415;
                   break;
 #endif
-                  
+
 #ifdef SI_FDI_MONS_WH
                 case SI_FDI_MONS_WH:
                   x1 = 0.3964;
                   x2 = 30.008;
                   break;
 #endif
-                  
+
 #ifdef SI_FDI_MONS_SAF
                 case SI_FDI_MONS_SAF:
                   x1 = 0.3964;
@@ -573,21 +573,21 @@ double ba_height_to_index (
                   break;
 #endif
                 }
-                
+
                 log_bhage = log (bhage);
-                
+
                 index = 4.5 +
                   38.787 -
                   2.805 * log_bhage * log_bhage +
                   0.0216 * bhage * log_bhage +
                   x1 * height +
                   x2 * height / bhage;
-                
+
                 /* convert back to metric */
                 index *= 0.3048;
                 break;
 #endif
-                
+
 #ifdef SI_FDI_NIGHGI
               case SI_FDI_NIGHGI:
                 switch ((short int) bhage)
@@ -654,7 +654,7 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_PLI_NIGHGI97
               case SI_PLI_NIGHGI97:
                 switch ((short int) bhage)
@@ -721,13 +721,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_PLI_NIGHGI
               case SI_PLI_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 3.791; x2 = 0.4338; break;
@@ -772,13 +772,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_SW_NIGHGI
               case SI_SW_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 7.867; x2 = 0.3516; break;
@@ -823,13 +823,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_SW_NIGHGI99
               case SI_SW_NIGHGI99:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 4.050; x2 = 0.4630; break;
@@ -894,13 +894,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_SW_NIGHGI2004
               case SI_SW_NIGHGI2004:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 4.7650; x2 = 0.4102; break;
@@ -965,13 +965,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_HWC_NIGHGI99
               case SI_HWC_NIGHGI99:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 4.361; x2 = 0.4638; break;
@@ -1036,13 +1036,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_HWC_NIGHGI
               case SI_HWC_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 4.957; x2 = 0.4325; break;
@@ -1087,7 +1087,7 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_HWI_NIGHGI
               case SI_HWI_NIGHGI:
                 switch ((short int) bhage)
@@ -1154,13 +1154,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_FDC_NIGHGI
               case SI_FDC_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 3.894 ; x2 = 0.5382; break;
@@ -1225,7 +1225,7 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_SE_NIGHGI
               case SI_SE_NIGHGI:
                 switch ((short int) bhage)
@@ -1292,13 +1292,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_SS_NIGHGI
               case SI_SS_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 3.317; x2 = 0.5634; break;
@@ -1343,13 +1343,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_SS_NIGHGI99
               case SI_SS_NIGHGI99:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 4.367; x2 = 0.5034; break;
@@ -1414,13 +1414,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_CWI_NIGHGI
               case SI_CWI_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 3.744; x2 = 0.4769; break;
@@ -1485,13 +1485,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_LW_NIGHGI
               case SI_LW_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 6.347; x2 = 0.2855; break;
@@ -1556,13 +1556,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_PY_NIGHGI
               case SI_PY_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 5.631 ;x2 = 0.2745; break;
@@ -1627,13 +1627,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_BA_NIGHGI
               case SI_BA_NIGHGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 12.14 ;x2 = 0.1957; break;
@@ -1698,13 +1698,13 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
 #ifdef SI_BL_THROWERGI
               case SI_BL_THROWERGI:
                 /* later, we divide by age-0.5, so check it now */
                 if (bhage < 0.5)
                   return SI_ERR_GI_MIN;
-                
+
                 switch ((short int) bhage)
                 {
                 case  1: x1 = 2.4623; x2 = 0.5809; break;
@@ -1769,7 +1769,7 @@ double ba_height_to_index (
                 }
                 break;
 #endif
-                
+
               default:
                   index = site_iterate (cu_index, bhage, SI_AT_BREAST, height);
                 break;
@@ -1792,20 +1792,20 @@ static double site_iterate (
   double step;
   double test_top;
   double y2bh;
-  
-  
+
+
   /* initial guess */
   site = height;
   if (site < 1.3)
     site = 1.3;
   step = site/2.0;
-  
+
   /* loop until real close, or other end condition */
   do
   {
     /* estimate y2bh */
     y2bh = si_y2bh (cu_index, site);
-    
+
     if (age_type == SI_AT_BREAST)
       test_top = index_to_height (cu_index, age, SI_AT_BREAST, site, y2bh, 0.5); // 0.5 may have to change
     else
@@ -1821,7 +1821,7 @@ static double site_iterate (
                                   age_to_age (cu_index, age, SI_AT_TOTAL, SI_AT_BREAST, y2bh),
                                   SI_AT_BREAST, site, y2bh, 0.5); // 0.5 may have to change
     }
-    
+
     if (test_top == SI_ERR_CURVE) /* unknown cu_index */
     {
       site = test_top;
@@ -1839,12 +1839,12 @@ static double site_iterate (
         site = test_top;
         break;
       }
-      
+
       /*
       printf ("age=%3.0f, height=%4.1f, test_top=%4.1f, site=%5.2f, step=%9.7f\n",
               age, height, test_top, site, step);
       */
-      
+
       if ((test_top - height > 0.01) ||
           (test_top - height < -0.01))
       {
@@ -1864,7 +1864,7 @@ static double site_iterate (
       else
         /* done */
         break;
-      
+
       /* check for lack of convergence, so we're not here forever */
       if (step < 0.00001 && step > -0.00001)
       {
@@ -1886,7 +1886,7 @@ static double site_iterate (
         step = step / 2.0;
       }
   } while (1);
-  
+
   return site;
 }
 
@@ -1894,13 +1894,13 @@ static double site_iterate (
 static double hu_garcia_q (double site_index, double bhage)
 {
   double h, q, step, diff, lastdiff;
-  
-  
+
+
   q = 0.02;
   step = 0.01;
   lastdiff = 0;
   diff = 0;
-  
+
   do
   {
     h = hu_garcia_h (q, bhage);
@@ -1925,7 +1925,7 @@ static double hu_garcia_q (double site_index, double bhage)
     if (step < 0.0000001)
       break;
   } while (1);
-  
+
   return q;
 }
 
@@ -1933,8 +1933,8 @@ static double hu_garcia_q (double site_index, double bhage)
 static double hu_garcia_h (double q, double bhage)
 {
   double a, height;
-  
-  
+
+
   a = 283.9 * pow (q, 0.5137);
   height = a * pow (1 - (1 - pow (1.3 / a, 0.5829)) * exp (-q * (bhage - 0.5)), 1.71556);
   return height;

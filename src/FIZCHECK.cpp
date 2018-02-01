@@ -1,4 +1,4 @@
-#include "../src/sindex.h"
+#include "sindex.h"
 #include <Rcpp.h>
 using namespace Rcpp;
 
@@ -17,21 +17,21 @@ short int fiz_check (char fiz)
 {
   switch (fiz)
   {
-  case 'A': 
-  case 'B': 
-  case 'C': 
+  case 'A':
+  case 'B':
+  case 'C':
     return FIZ_COAST;
-  case 'D': 
-  case 'E': 
-  case 'F': 
-  case 'G': 
-  case 'H': 
-  case 'I': 
-  case 'J': 
-  case 'K': 
-  case 'L': 
+  case 'D':
+  case 'E':
+  case 'F':
+  case 'G':
+  case 'H':
+  case 'I':
+  case 'J':
+  case 'K':
+  case 'L':
     return FIZ_INTERIOR;
-  default: 
+  default:
     return FIZ_UNKNOWN;
   }
 }

@@ -1,3 +1,7 @@
+#ifndef sindex.h
+#define sindex.h
+#include <Rcpp.h>
+
 /*
  * sindex.h
  *
@@ -53,11 +57,11 @@
  **/
 
 #define	SINDEX_VER		152
- 
-/* 
+
+/*
  * age types
  */
- 
+
 #define SI_AT_TOTAL   0
 #define SI_AT_BREAST  1
 
@@ -378,7 +382,7 @@
  * Site index conversion between species.
  * Here's how to use the following array:
  * The four elements are: reference species, target species, coeff_a, coeff_b.
- * 
+ *
  * Target_SI = coeff_a + coeff_b * Reference_SI
  *
  * When looping through the array, reject entries that have 0 for both
@@ -496,3 +500,5 @@ extern char *si_curve_name[SI_MAX_CURVES];  /* curve names */
  *     8: si = fn (ht, age) growth intercept
  */
 extern char si_curve_types[SI_MAX_CURVES];   /* curve types available */
+
+#endif

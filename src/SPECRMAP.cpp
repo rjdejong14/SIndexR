@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include <string.h>
 #include <ctype.h>
-#include "../src/sindex.h"
+#include "sindex.h"
 using namespace Rcpp;
 
 /*
@@ -66,14 +66,14 @@ short int species_map (std::string sc)
 {
   short int i, i2;
   char sc2[10];
-  
-  
+
+
   i2 = 0;
-  /* the orginal line is 
-  for (i = 0; i < strlen (sc) && i < 10; i++) 
+  /* the orginal line is
+  for (i = 0; i < strlen (sc) && i < 10; i++)
   the below is modified line*/
-   
-  for (i = 0; i < 10; i++) 
+
+  for (i = 0; i < 10; i++)
   {
     if (sc[i] != ' ')
     {
@@ -82,7 +82,7 @@ short int species_map (std::string sc)
     }
   }
   sc2[i2] = '\0';
-  
+
   if (strcmp (sc2, "A"   ) == 0) return SI_SPEC_A;
   if (strcmp (sc2, "ABAL") == 0) return SI_SPEC_ABAL;
   if (strcmp (sc2, "ABCO") == 0) return SI_SPEC_ABCO;
@@ -228,7 +228,7 @@ short int species_map (std::string sc)
   if (strcmp (sc2, "Z"   ) == 0) return SI_SPEC_Z;
   if (strcmp (sc2, "ZC"  ) == 0) return SI_SPEC_ZC;
   if (strcmp (sc2, "ZH"  ) == 0) return SI_SPEC_ZH;
-  
+
   return SI_ERR_CODE;
 }
 
@@ -238,8 +238,8 @@ short int species_remap (std::string sc, char fiz)
 {
   short int i, i2;
   char sc2[10];
-  
-  
+
+
   i2 = 0;
   /* the original codes:
    * for (i = 0; i < strlen (sc) && i < 10; i++)
@@ -254,7 +254,7 @@ short int species_remap (std::string sc, char fiz)
     }
   }
   sc2[i2] = '\0';
-  
+
   if (strcmp (sc2, "A"   ) == 0) return SI_SPEC_AT;
   if (strcmp (sc2, "ABAL") == 0) return SI_SPEC_BA;
   if (strcmp (sc2, "ABCO") == 0) return SI_SPEC_BA;
@@ -624,6 +624,6 @@ short int species_remap (std::string sc, char fiz)
     default:           return SI_ERR_CODE;
     }
   if (strcmp (sc2, "ZH"  ) == 0) return SI_SPEC_AT;
-  
+
   return SI_ERR_CODE;
 }

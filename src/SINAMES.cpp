@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "../src/sindex.h"
+#include "sindex.h"
 using namespace Rcpp;
 
 
@@ -158,7 +158,7 @@ using namespace Rcpp;
  */
 
 
-char *si_spec_code[SI_MAX_SPECIES] = 
+char *si_spec_code[SI_MAX_SPECIES] =
   {
 #ifdef SI_SPEC_A
   "A",
@@ -597,7 +597,7 @@ char *si_spec_code[SI_MAX_SPECIES] =
 #endif
   };
 
-char *si_spec_name[SI_MAX_SPECIES] = 
+char *si_spec_name[SI_MAX_SPECIES] =
   {
 #ifdef SI_SPEC_A
   "Aspen",
@@ -1482,7 +1482,7 @@ char *si_curve_name[SI_MAX_CURVES] =
 * Site index conversion between species.
 * Here's how to use the following array:
 * The four elements are: reference species, target species, coeff_a, coeff_b.
-* 
+*
 * Target_SI = coeff_a + coeff_b * Reference_SI
 */
 double si_convert[SI_MAX_CONVERT][4] =
@@ -1925,7 +1925,7 @@ char si_curve_types[SI_MAX_CURVES] =
   8,
 #endif
 #ifdef SI_SW_NIGHTA
-  5, 
+  5,
 #endif
 #ifdef SI_CWI_NIGHGI
   8,
